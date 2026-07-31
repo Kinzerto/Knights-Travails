@@ -61,11 +61,18 @@ function knightMoves(start, destination) {
     return;
   }
 
-  if (start[0] >= 8 || start[0] < 0 || start[1] >= 8 || start[1] < 0) {
+  if (
+    start.length !== 2 ||
+    start[0] >= 8 ||
+    start[0] < 0 ||
+    start[1] >= 8 ||
+    start[1] < 0
+  ) {
     console.log("Invalid Start");
     return;
   }
   if (
+    destination.length !== 2 ||
     destination[0] >= 8 ||
     destination[0] < 0 ||
     destination[1] >= 8 ||
@@ -82,4 +89,4 @@ function knightMoves(start, destination) {
   });
 }
 
-knightMoves([0, -1], [2, 1]);
+knightMoves([0, 0], [0, 0]);
