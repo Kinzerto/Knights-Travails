@@ -28,24 +28,23 @@ function checkMove(x, y) {
 }
 
 function knightPath(start, destination) {
-  let hasVisited = [start];
+  const visited = new Set();
+  visited.add(`${start[0]},${start[1]}`);
+
   let queue = [{ current: start, path: [start] }];
   let count = 0;
 
-  while (true) {
+  while (queue[count]) {
     const current = queue[count].path;
     if (checkMove(queue[count].current, destination)) {
       return queue[count].path;
     }
 
     validMoves(queue[count].current).forEach((move) => {
-      const hasMatch = hasVisited.some(
-        (subArr) =>
-          subArr.length === 2 && subArr[0] === move[0] && subArr[1] === move[1],
-      );
+      const hasMatch = `${move[0]},${move[1]}`;
 
-      if (hasMatch) return;
-      hasVisited.push(move);
+      if (visited.has(hasMatch)) return;
+      visited.add(hasMatch);
       queue.push({ current: move, path: [...current, move] });
     });
 
@@ -92,4 +91,4 @@ function knightMoves(start, destination) {
   });
 }
 
-knightMoves([0, 0], [2, 1]);
+knightMoves([0, 0], [7, 7]);
