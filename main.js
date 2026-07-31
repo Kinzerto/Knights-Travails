@@ -32,9 +32,11 @@ function knightPath(start, destination) {
   let queue = [{ current: start, path: [start] }];
   let count = 0;
 
-  while (queue[count]) {
+  while (true) {
     const current = queue[count].path;
-    if (checkMove(queue[count].current, destination)) return queue[count].path;
+    if (checkMove(queue[count].current, destination)) {
+      return queue[count].path;
+    }
 
     validMoves(queue[count].current).forEach((move) => {
       const hasMatch = hasVisited.some(
@@ -83,10 +85,11 @@ function knightMoves(start, destination) {
   }
 
   const result = knightPath(start, destination);
+
   console.log(`You made it in ${result.length - 1} moves!  Here's your path:`);
   result.forEach((move) => {
     console.log(move);
   });
 }
 
-knightMoves([0, 0], [0, 0]);
+knightMoves([0, 0], [2, 1]);
