@@ -23,7 +23,7 @@ function validMoves(position) {
   return result;
 }
 
-function check(x, y) {
+function checkMove(x, y) {
   return x[0] === y[0] && x[1] === y[1];
 }
 
@@ -34,7 +34,7 @@ function knightPath(start, destination) {
 
   while (queue[count]) {
     const current = queue[count].path;
-    if (check(queue[count].current, destination)) return queue[count].path;
+    if (checkMove(queue[count].current, destination)) return queue[count].path;
 
     validMoves(queue[count].current).forEach((move) => {
       const hasMatch = hasVisited.some(
@@ -51,12 +51,35 @@ function knightPath(start, destination) {
   }
 }
 
-function knightMoves(start, end) {
-  const result = knightPath(start, end);
+function knightMoves(start, destination) {
+  if (!start) {
+    console.log(`No Start Value`);
+    return;
+  }
+  if (!destination) {
+    console.log(`No Destination Value`);
+    return;
+  }
+
+  if (start[0] >= 8 || start[0] < 0 || start[1] >= 8 || start[1] < 0) {
+    console.log("Invalid Start");
+    return;
+  }
+  if (
+    destination[0] >= 8 ||
+    destination[0] < 0 ||
+    destination[1] >= 8 ||
+    destination[1] < 0
+  ) {
+    console.log("Invalid Destination");
+    return;
+  }
+
+  const result = knightPath(start, destination);
   console.log(`You made it in ${result.length - 1} moves!  Here's your path:`);
   result.forEach((move) => {
     console.log(move);
   });
 }
 
-console.log(knightMoves([3, 3], [4, 3]));
+knightMoves([0, -1], [2, 1]);
