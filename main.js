@@ -23,57 +23,40 @@ function validMoves(position) {
   return result;
 }
 
-// function knightMoves(start, destination) {
-//   let visited = [start];
-//   let queue = [[start]];
-//   let count = 0;
+function check(x, y) {
+  return x[0] === y[0] && x[1] === y[1];
+}
 
-//   validMoves(queue[count][queue[count].length - 1]).forEach((move) => {
-//     const curr = queue[count];
-//     const x = queue.push([curr[0], move]);
-//   });
-
-//   console.log(queue);
-// }
-
-function knightMoves(start, destination) {
+function knightPath(start, destination) {
   let hasVisited = [start];
   let queue = [{ current: start, path: [start] }];
   let count = 0;
 
   while (queue[count]) {
     const current = queue[count].path;
+    if (check(queue[count].current, destination)) return queue[count].path;
 
     validMoves(queue[count].current).forEach((move) => {
       const hasMatch = hasVisited.some(
         (subArr) =>
           subArr.length === 2 && subArr[0] === move[0] && subArr[1] === move[1],
       );
-      hasVisited.push(move);
+
       if (hasMatch) return;
+      hasVisited.push(move);
       queue.push({ current: move, path: [...current, move] });
     });
+
     count++;
   }
-  queue.forEach((move) => {
-    console.log(move.path);
-  });
-  // console.log(visited);
 }
 
-const test = [
-  [0, 0],
-  [1, 1],
-  [2, 2],
-];
+function knightMoves(start, end) {
+  const result = knightPath(start, end);
+  console.log(`You made it in ${result.length - 1} moves!  Here's your path:`);
+  result.forEach((move) => {
+    console.log(move);
+  });
+}
 
-const hasMatch = test.some(
-  (subArr) => subArr.length === 2 && subArr[0] === 0 && subArr[1] === 0,
-);
-
-console.log(hasMatch);
-// function check(x, y) {
-//   return x[0] === y[0] && x[1] === y[1];
-// }
-
-knightMoves([0, 0]);
+console.log(knightMoves([3, 3], [4, 3]));
