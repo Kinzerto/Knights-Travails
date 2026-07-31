@@ -28,8 +28,8 @@ function checkIfSameValue(x, y) {
 }
 
 function knightPath(start, destination) {
-  const visited = new Set();
-  visited.add(`${start[0]},${start[1]}`);
+  const hasWalked = new Set();
+  hasWalked.add(`${start[0]},${start[1]}`);
 
   let queue = [{ current: start, path: [start] }];
   let count = 0;
@@ -43,8 +43,8 @@ function knightPath(start, destination) {
     validMoves(queue[count].current).forEach((move) => {
       const hasMatch = `${move[0]},${move[1]}`;
 
-      if (visited.has(hasMatch)) return;
-      visited.add(hasMatch);
+      if (hasWalked.has(hasMatch)) return;
+      hasWalked.add(hasMatch);
       queue.push({ current: move, path: [...current, move] });
     });
 
@@ -91,4 +91,4 @@ function knightMoves(start, destination) {
   });
 }
 
-knightMoves([0, 0], [7, 7]);
+knightMoves([3, 3], [7, 7]);
