@@ -23,7 +23,7 @@ function validMoves(position) {
   return result;
 }
 
-function checkMove(x, y) {
+function checkIfSameValue(x, y) {
   return x[0] === y[0] && x[1] === y[1];
 }
 
@@ -36,7 +36,7 @@ function knightPath(start, destination) {
 
   while (queue[count]) {
     const current = queue[count].path;
-    if (checkMove(queue[count].current, destination)) {
+    if (checkIfSameValue(queue[count].current, destination)) {
       return queue[count].path;
     }
 
