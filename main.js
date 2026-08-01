@@ -102,19 +102,10 @@ function knightMoves(start, destination) {
   // if path found
   const result = knightPath(start, destination);
 
-  /*
-  This displays the path 
-  output eg. You made it in 4 moves!  Here's your path:
-  [ 3, 3 ]
-  [ 5, 2 ]
-  [ 7, 3 ]
-  [ 6, 5 ]
-  [ 7, 7 ]
- */
   console.log(`You made it in ${result.length - 1} moves!  Here's your path:`);
   result.forEach((move) => {
     console.log(move);
   });
 }
 
-knightMoves([3, 3], [7, 7]);
+knightMoves([1, 7], [7, 7]);
